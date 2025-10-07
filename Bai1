@@ -1,0 +1,110 @@
+#MyDataSum
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('hotel_bookings_ok.csv')
+
+data_count = df.count()
+print(data_count)
+
+data_mean = df.mean()
+print(data_mean)
+
+data_std = df.std()
+print(data_std)
+
+data_min = df.min()
+print(data_min)
+
+data_max = df.max()
+print(data_max)
+
+quantiles = df.apply(lambda x: x.quantile([0.25, 0.5, 0.75]))
+print("Q1, Q2, Q3: ")
+print(quantiles.to_string())
+
+plt.hist(df['stays_in_week_nights'], bins=5, edgecolor='k')  # 'bins' là số lượng cột dữ liệu trong histogram
+
+plt.xlabel('Giá trị')
+plt.ylabel('Số lượng')
+plt.title('Histogram cho cột "stays_in_week_nights"')
+plt.show()
+#MyDataClean
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# doc
+df_hotel = pd.read_csv('hotel_bookings.csv')
+
+# hien thi
+print(df_hotel.to_string())
+
+# xoa
+df_hotel_dropped = df_hotel.drop(columns=['company', 'arrival_date_month', 'reserved_room_type'])
+print(df_hotel_dropped.head())
+
+# chon cac cot du lieu so
+df_hotel_numeric = df_hotel.select_dtypes(include=['number'])
+print(df_hotel_numeric)
+
+# xoa cac dong co du lieu khuyet
+df_hotel_cleaned = df_hotel_numeric.dropna()
+print(df_hotel_cleaned)
+
+# dem so dong dl ko bi khuyet
+df_hotel_count = df_hotel_cleaned.count()
+print(df_hotel_count)
+
+df_hotel_cleaned.to_csv('hotel_booking_ok.csv', index=False)
+
+df1 = pd.read_csv('abalone.csv')
+df1 = df1.select_dtypes(include=['number'])
+df2 = df1.interpolate()
+print(df2.head(20))
+#MyTrain
+import pandas as pd
+
+# doc
+df_train = pd.read_csv('train.csv')
+
+# hien thi
+print(df_train.to_string())
+
+# chon cac cot du lieu so
+df_train_numeric = df_train.select_dtypes(include=['number'])
+print(df_train_numeric)
+
+# xoa cac dong co du lieu khuyet
+df_train_cleaned = df_train_numeric.dropna()
+print(df_train_cleaned)
+
+# dem so dong dl ko bi khuyet
+df_train_count = df_train_cleaned.count()
+print(df_train_count)
+
+# tbinh
+df_train_mean = df_train_cleaned.mean()
+print(df_train_mean)
+
+# do lech chuan
+df_train_std = df_train_cleaned.std()
+print(df_train_std)
+
+#min
+df_train_min = df_train_cleaned.min()
+print(df_train_min)
+
+#max
+df_train_max = df_train_cleaned.max()
+print(df_train_max)
+
+# phan vi cho tung cot
+df_train_quantiles = df_train_cleaned.apply(lambda x: x.quantile([0.25, 0.5, 0.75]))
+print("phân vị Q1, Q2 và Q3 cho các cột:")
+print(df_train_quantiles.to_string())
+
+import  matplotlib.pyplot as plt
+plt.hist(df_train_cleaned['Survived'], bins=5, edgecolor='k')
+plt.xlabel('Giá trị')
+plt.ylabel('Số lượng')
+plt.title('Histogram cho cot "Survived"')
+plt.show()
