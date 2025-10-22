@@ -1,0 +1,64 @@
+#LinearRed1
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('winequality-red.csv')
+print(df.head())
+
+axit_ip = float(input("Nhập độ axit volatile acidity (g/l): "))
+
+X = df['volatile acidity']
+Y = df['alcohol']
+X = np.array(X).reshape(-1, 1)
+
+print(X.shape)
+print(Y.shape)
+
+model = LinearRegression()
+model.fit(X, Y)
+
+new_axit = np.array([[axit_ip]])
+alcohol = model.predict(new_axit)
+
+print(f"Dự báo nồng độ alcohol với độ axit {axit_ip} g/l là: {alcohol[0]:.2f} %vol")
+#LinearRed2
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('weatherHistory.csv')
+
+x = df[['Wind Speed (km/h)','Temperature (C)']]
+visibility = df['Visibility (km)']
+x = np.array(x)
+
+print(x.shape)
+print(visibility.shape)
+#print(x)
+#print(visibility)
+
+model = LinearRegression()
+model.fit(x,visibility)
+
+x1 = float(input('nhập vào tốc độ gió:'))
+x2 = float(input('nhập vào nhiệt độ:'))
+
+new_x = np.array([[x1,x2]])
+predicted_visibility = model.predict(new_x)
+print('f dự đoán tầm nhìn là:', predicted_visibility[0], '(km)')
+#MyRED1
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('winequality-red.csv')
+print(df)
+
+column1 = df['alcohol']
+column2 = df['volatile acidity']
+plt.scatter(column1, column2, label='dữ liệu', color='blue', marker='o')
+plt.title('Biểu đồ scarter')
+plt.xlabel('alcohol')
+plt.ylabel('volatile acidity')
+plt.legend()
+plt.show()
